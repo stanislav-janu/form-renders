@@ -1,0 +1,28 @@
+{
+	"name": "JCode/FormRenders",
+	"description": "Form renders for Nette Forms",
+	"homepage": "https://lweb.cz",
+	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"authors": [
+		{
+			"name": "Stanislav Janů",
+			"homepage": "http://lweb.cz"
+		}
+	],
+	"require": {
+		"php": ">=7.0.0",
+		"nette/forms": "^2.4"
+	},
+	"conflict": {
+		"nette/nette": "<2.2"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"minimum-stability": "dev",
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
+	}
+}
