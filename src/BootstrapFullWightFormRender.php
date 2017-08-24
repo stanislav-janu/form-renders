@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: stanley
- * Date: 20.11.15
- * Time: 18:27
- */
+<?php declare(strict_types=1);
 
 namespace JCode;
 
