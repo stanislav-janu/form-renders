@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: stanley
- * Date: 20.11.15
- * Time: 18:27
- */
+<?php declare(strict_types=1);
 
 namespace JCode;
 
@@ -13,6 +7,8 @@ use Nette,
 
 class BootstrapTabbedFormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {
+	public $isAjax = false;
+
 	public $wrappers = array(
 		'form' => array(
 			'container' => NULL,
@@ -70,9 +66,14 @@ class BootstrapTabbedFormRender extends Nette\Forms\Rendering\DefaultFormRendere
 		),
 	);
 
+	public function __construct(bool $isAjax = false)
+	{
+		$this->isAjax = $isAjax;
+	}
+
 	public function render(Nette\Forms\Form $form, $mode = NULL)
 	{
-		$form->getElementPrototype()->class('tab-content');
+		$form->getElementPrototype()->class('tab-content'. ($this->isAjax ? ' ajax' : ''));
 		foreach ($form->getControls() as $control)
 		{
 			if ($control instanceof Controls\Button)

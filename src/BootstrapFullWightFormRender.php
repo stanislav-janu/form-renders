@@ -7,6 +7,8 @@ use Nette,
 
 class BootstrapFullWightFormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {
+	public $isAjax = false;
+
 	public $wrappers = array(
 		'form' => array(
 			'container' => NULL,
@@ -64,9 +66,14 @@ class BootstrapFullWightFormRender extends Nette\Forms\Rendering\DefaultFormRend
 		),
 	);
 
+	public function __construct(bool $isAjax = false)
+	{
+		$this->isAjax = $isAjax;
+	}
+
 	public function render(Nette\Forms\Form $form, $mode = NULL)
 	{
-		$form->getElementPrototype()->class('form-horizontal');
+		$form->getElementPrototype()->class('form-horizontal'. ($this->isAjax ? ' ajax' : ''));
 		foreach ($form->getControls() as $control)
 		{
 			if ($control instanceof Controls\Button)

@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: stanley
- * Date: 20.11.15
- * Time: 18:27
- */
+<?php declare(strict_types=1);
 
 namespace JCode;
 
@@ -13,6 +7,8 @@ use Nette,
 
 class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {
+	public $isAjax = false;
+
 	public $wrappers = array(
 		'form' => array(
 			'container' => NULL,
@@ -70,9 +66,14 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		),
 	);
 
+	public function __construct(bool $isAjax = false)
+	{
+		$this->isAjax = $isAjax;
+	}
+
 	public function render(Nette\Forms\Form $form, $mode = NULL)
 	{
-		$form->getElementPrototype()->class('form-horizontal');
+		$form->getElementPrototype()->class('form-horizontal'. ($this->isAjax ? ' ajax' : ''));
 		foreach ($form->getControls() as $control)
 		{
 			if ($control instanceof Controls\Button)
