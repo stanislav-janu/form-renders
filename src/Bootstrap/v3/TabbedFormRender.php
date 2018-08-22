@@ -1,14 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace JCode;
+namespace JCode\FormRenders\Bootstrap\v3;
 
-use Nette,
-	Nette\Forms\Controls;
-
-class BootstrapTabbedFormRender extends Nette\Forms\Rendering\DefaultFormRenderer
+class TabbedFormRender extends FormRender
 {
-	public $isAjax = false;
-
 	public $wrappers = array(
 		'form' => array(
 			'container' => NULL,
@@ -66,32 +61,9 @@ class BootstrapTabbedFormRender extends Nette\Forms\Rendering\DefaultFormRendere
 		),
 	);
 
-	public function __construct(bool $isAjax = false)
+	public function renderBegin()
 	{
-		$this->isAjax = $isAjax;
-	}
-
-	public function render(Nette\Forms\Form $form, $mode = NULL)
-	{
-		$form->getElementPrototype()->class('tab-content'. ($this->isAjax ? ' ajax' : ''));
-		foreach ($form->getControls() as $control)
-		{
-			if ($control instanceof Controls\Button)
-			{
-				$control->setAttribute('class', empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
-				$usedPrimary = TRUE;
-
-			}
-			elseif ($control instanceof Controls\TextBase || $control instanceof Controls\SelectBox || $control instanceof Controls\MultiSelectBox)
-			{
-				$control->setAttribute('class', 'form-control');
-
-			}
-			elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList)
-			{
-				$control->getSeparatorPrototype()->setName('div')->class($control->getControlPrototype()->type);
-			}
-		}
-		return parent::render($form, $mode);
+		$this->form->getElementPrototype()->setAttribute('class', 'tab-content'. ($this->isAjax ? ' ajax' : ''));
+		return parent::renderBegin();
 	}
 }

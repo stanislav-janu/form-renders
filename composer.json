@@ -11,18 +11,18 @@
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"nette/forms": "^3.0"
+		"nette/forms": "^2.4"
 	},
 	"conflict": {
-		"nette/nette": "<2.4"
+		"nette/forms": "<2.4"
 	},
 	"autoload": {
 		"classmap": ["src/"]
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"extra": {
 		"branch-alias": {
-			"dev-master": "1.0-dev"
+			"dev-master": "2.0-dev"
 		}
 	}
 }
