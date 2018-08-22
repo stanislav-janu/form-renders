@@ -4,37 +4,37 @@ namespace JCode\FormRenders\Bootstrap\v3;
 
 class TabbedFormRender extends FormRender
 {
-	public $wrappers = array(
-		'form' => array(
-			'container' => NULL,
-		),
+	public $wrappers = [
+		'form' => [
+			'container' => null,
+		],
 
-		'error' => array(
+		'error' => [
 			'container' => 'div class="alert alert-danger" role=alert',
 			'item' => 'p',
-		),
+		],
 
-		'group' => array(
+		'group' => [
 			'container' => 'div role=tabpanel class="tab-pane"',
 			'label' => 'h2',
 			'description' => 'span class=language-code style="display:none"',
-		),
+		],
 
-		'controls' => array(
-			'container' => NULL,
-		),
+		'controls' => [
+			'container' => null,
+		],
 
-		'pair' => array(
+		'pair' => [
 			'container' => 'div class=form-group',
 			'.required' => 'required',
-			'.optional' => NULL,
-			'.odd' => NULL,
+			'.optional' => null,
+			'.odd' => null,
 			'.error' => 'has-error',
-		),
+		],
 
-		'control' => array(
-			'container' => NULL,
-			'.odd' => NULL,
+		'control' => [
+			'container' => null,
+			'.odd' => null,
 
 			'description' => 'span class=help-block',
 			'requiredsuffix' => '',
@@ -48,18 +48,18 @@ class TabbedFormRender extends FormRender
 			'.submit' => 'button',
 			'.image' => 'imagebutton',
 			'.button' => 'button',
-		),
+		],
 
-		'label' => array(
-			'container' => NULL,
-			'suffix' => NULL,
+		'label' => [
+			'container' => null,
+			'suffix' => null,
 			'requiredsuffix' => '',
-		),
+		],
 
-		'hidden' => array(
-			'container' => NULL,
-		),
-	);
+		'hidden' => [
+			'container' => null,
+		],
+	];
 
 	public function renderBegin()
 	{

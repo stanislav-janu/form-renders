@@ -4,37 +4,37 @@ namespace JCode\FormRenders\Bootstrap\v3;
 
 class FullWightFormRender extends FormRender
 {
-	public $wrappers = array(
-		'form' => array(
-			'container' => NULL,
-		),
+	public $wrappers = [
+		'form' => [
+			'container' => null,
+		],
 
-		'error' => array(
+		'error' => [
 			'container' => 'div class="alert alert-danger" role=alert',
 			'item' => 'p',
-		),
+		],
 
-		'group' => array(
+		'group' => [
 			'container' => 'fieldset',
 			'label' => 'legend',
 			'description' => 'p',
-		),
+		],
 
-		'controls' => array(
-			'container' => NULL,
-		),
+		'controls' => [
+			'container' => null,
+		],
 
-		'pair' => array(
+		'pair' => [
 			'container' => 'div class=form-group',
 			'.required' => 'required',
-			'.optional' => NULL,
-			'.odd' => NULL,
+			'.optional' => null,
+			'.odd' => null,
 			'.error' => 'has-error',
-		),
+		],
 
-		'control' => array(
+		'control' => [
 			'container' => 'div class=col-sm-12',
-			'.odd' => NULL,
+			'.odd' => null,
 
 			'description' => 'span class=help-block',
 			'requiredsuffix' => '',
@@ -48,16 +48,16 @@ class FullWightFormRender extends FormRender
 			'.submit' => 'button',
 			'.image' => 'imagebutton',
 			'.button' => 'button',
-		),
+		],
 
-		'label' => array(
+		'label' => [
 			'container' => 'div class="col-sm-12 control-label" style="text-align: left"',
-			'suffix' => NULL,
+			'suffix' => null,
 			'requiredsuffix' => '',
-		),
+		],
 
-		'hidden' => array(
-			'container' => NULL,
-		),
-	);
+		'hidden' => [
+			'container' => null,
+		],
+	];
 }

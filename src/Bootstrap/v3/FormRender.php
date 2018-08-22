@@ -11,7 +11,7 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 
 	public $wrappers = [
 		'form' => [
-			'container' => NULL,
+			'container' => null,
 		],
 
 		'error' => [
@@ -26,20 +26,20 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		],
 
 		'controls' => [
-			'container' => NULL,
+			'container' => null,
 		],
 
 		'pair' => [
 			'container' => 'div class=form-group',
 			'.required' => 'required',
-			'.optional' => NULL,
-			'.odd' => NULL,
+			'.optional' => null,
+			'.odd' => null,
 			'.error' => 'has-error',
 		],
 
 		'control' => [
 			'container' => 'div class=col-sm-8',
-			'.odd' => NULL,
+			'.odd' => null,
 
 			'description' => 'span class=help-block',
 			'requiredsuffix' => '',
@@ -57,12 +57,12 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 
 		'label' => [
 			'container' => 'div class="col-sm-4 control-label"',
-			'suffix' => NULL,
+			'suffix' => null,
 			'requiredsuffix' => '',
 		],
 
 		'hidden' => [
-			'container' => NULL,
+			'container' => null,
 		],
 	];
 
