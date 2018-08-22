@@ -104,8 +104,8 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		{
 			if ($control instanceof Nette\Forms\Controls\Button)
 			{
-				if ($control->controlPrototype->class === null || (is_array($control->controlPrototype->class) && !Nette\Utils\Strings::contains(implode(' ', array_keys($control->controlPrototype->class)), 'btn btn-')))
-					$control->controlPrototype->addClass((empty($primary) ? 'btn btn-outline-primary' : 'btn btn-outline-secondary'));
+				if ($control->controlPrototype->getAttribute('class') === null || (is_array($control->controlPrototype->getAttribute('class')) && !Nette\Utils\Strings::contains(implode(' ', array_keys($control->controlPrototype->getAttribute('class'))), 'btn btn-')))
+					$control->controlPrototype->setAttribute('class', (empty($primary) ? 'btn btn-outline-primary' : 'btn btn-outline-secondary'));
 
 				$primary = true;
 			}
@@ -122,11 +122,11 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 	public function renderLabel(Nette\Forms\IControl $control): Nette\Utils\Html
 	{
 		if ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList)
-			$control->labelPrototype->addClass('form-check-label');
+			$control->labelPrototype->setAttribute('class', 'form-check-label');
 		elseif ($control instanceof Nette\Forms\Controls\RadioList)
-			$control->labelPrototype->addClass('form-check-label');
+			$control->labelPrototype->setAttribute('class', 'form-check-label');
 		else
-			$control->labelPrototype->addClass('col-form-label');
+			$control->labelPrototype->setAttribute('class', 'col-form-label');
 
 		$parent = parent::renderLabel($control);
 		return $parent;
@@ -141,27 +141,27 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 	{
 		if ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList)
 		{
-			$control->controlPrototype->addClass('form-check-input');
+			$control->control->setAttribute('class', 'form-check-input');
 
 			if ($control instanceof Nette\Forms\Controls\CheckboxList)
-				$control->separatorPrototype->setName('div')->addClass('form-check form-check-inline');
+				$control->separatorPrototype->setName('div')->setAttribute('class', 'form-check form-check-inline');
 		}
 		elseif ($control instanceof Nette\Forms\Controls\RadioList)
 		{
-			$control->containerPrototype->setName('div')->addClass('form-check');
-			$control->itemLabelPrototype->addClass('form-check-label');
-			$control->controlPrototype->addClass('form-check-input');
+			$control->containerPrototype->setName('div')->setAttribute('class', 'form-check');
+			$control->itemLabelPrototype->setAttribute('class', 'form-check-label');
+			$control->controlPrototype->setAttribute('class', 'form-check-input');
 		}
 		elseif ($control instanceof Nette\Forms\Controls\UploadControl)
 		{
-			$control->controlPrototype->addClass('form-control-file');
+			$control->controlPrototype->setAttribute('class', 'form-control-file');
 		}
 		else
 		{
 			if ($control->hasErrors())
-				$control->controlPrototype->addClass('is-invalid');
+				$control->controlPrototype->setAttribute('class', 'is-invalid');
 
-			$control->controlPrototype->addClass('form-control');
+			$control->controlPrototype->setAttribute('class', 'form-control');
 		}
 
 		$parent = parent::renderControl($control);
@@ -177,17 +177,17 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 				$children = $parent->getChildren();
 				$parent->removeChildren();
 
-				$container = Nette\Utils\Html::el('div')->setClass('input-group');
+				$container = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group');
 
 				if ($leftAddon !== null)
 				{
 					if (!is_array($leftAddon))
 						$leftAddon = [$leftAddon];
 
-					$div = Nette\Utils\Html::el('div')->setClass('input-group-prepend');
+					$div = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group-prepend');
 
 					foreach ($leftAddon as $v)
-						$div->insert(null, Nette\Utils\Html::el('span')->setClass('input-group-text')->setText($v));
+						$div->insert(null, Nette\Utils\Html::el('span')->setAttribute('class', 'input-group-text')->setText($v));
 
 					$container->insert(null, $div);
 				}
@@ -213,10 +213,10 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 					if (!is_array($rightAddon))
 						$rightAddon = [$rightAddon];
 
-					$div = Nette\Utils\Html::el('div')->setClass('input-group-append');
+					$div = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group-append');
 
 					foreach ($rightAddon as $v)
-						$div->insert(null, Nette\Utils\Html::el('span')->setClass('input-group-text')->setText($v));
+						$div->insert(null, Nette\Utils\Html::el('span')->setAttribute('class', 'input-group-text')->setText($v));
 
 					$container->insert(null, $div);
 				}
