@@ -67,6 +67,8 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		],
 	];
 
+	public $labelClass = 'col-form-label';
+
 	public function __construct(bool $isAjax = false)
 	{
 		$this->isAjax = $isAjax;
@@ -133,7 +135,7 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		elseif ($control instanceof Nette\Forms\Controls\RadioList)
 			$control->labelPrototype->setAttribute('class', 'form-check-label');
 		else
-			$control->labelPrototype->setAttribute('class', 'col-form-label');
+			$control->labelPrototype->setAttribute('class', $this->labelClass);
 
 		$parent = parent::renderLabel($control);
 		return $parent;
