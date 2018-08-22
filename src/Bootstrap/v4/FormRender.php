@@ -72,6 +72,13 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		$this->isAjax = $isAjax;
 	}
 
+	public function renderBegin()
+	{
+		if(empty($this->form->getElementPrototype()->getAttribute('class')))
+			$this->form->getElementPrototype()->setAttribute('class', 'form-horizontal'. ($this->isAjax ? ' ajax' : ''));
+		return parent::renderBegin();
+	}
+
 	/**
 	 * @param Nette\Forms\IControl $control
 	 * @param bool $own
@@ -141,7 +148,7 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 	{
 		if ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList)
 		{
-			$control->control->setAttribute('class', 'form-check-input');
+			$control->controlPrototype->setAttribute('class', 'form-check-input');
 
 			if ($control instanceof Nette\Forms\Controls\CheckboxList)
 				$control->separatorPrototype->setName('div')->setAttribute('class', 'form-check form-check-inline');
