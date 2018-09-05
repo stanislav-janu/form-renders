@@ -89,7 +89,7 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		{
 			$parent->setHtmlAttribute('class', 'btn btn-default');
 		}
-		elseif ($parent instanceof Controls\TextBase || $parent instanceof Controls\SelectBox || $parent instanceof Controls\MultiSelectBox)
+		elseif ($parent instanceof Controls\TextBase || $parent instanceof Controls\TextArea || $parent instanceof Controls\TextInput || $parent instanceof Controls\SelectBox || $parent instanceof Controls\MultiSelectBox)
 		{
 			$parent->setHtmlAttribute('class', 'form-control');
 			if($parent instanceof Controls\TextBase)
