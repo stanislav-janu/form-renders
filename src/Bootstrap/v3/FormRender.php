@@ -85,6 +85,23 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 	 */
 	public function renderControls($parent)
 	{
+		if ($parent instanceof Nette\Forms\ControlGroup)
+		{
+			foreach($parent->getControls() as $control)
+			{
+				$this->convertControl($control);
+			}
+		}
+		else
+		{
+			$this->convertControl($parent);
+		}
+
+		return parent::renderControls($parent);
+	}
+
+	public function convertControl($parent)
+	{
 		if ($parent instanceof Controls\Button && empty($parent->control->getAttribute('class')))
 		{
 			$parent->setHtmlAttribute('class', 'btn btn-default');
@@ -113,7 +130,5 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		{
 			$parent->getSeparatorPrototype()->setName('div')->setAttribute('class', $parent->getControlPrototype()->type);
 		}
-
-		return parent::renderControls($parent);
 	}
 }
