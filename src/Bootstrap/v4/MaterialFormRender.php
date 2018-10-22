@@ -35,7 +35,7 @@ class MaterialFormRender extends FormRender
 		],
 
 		'control' => [
-			'container' => 'div class="col-lg-6 col-md-9 col-sm-12"',
+			'container' => 'div class="col-md-9 col-sm-12"',
 			'.odd' => null,
 
 			'description' => 'small class="form-text text-muted"',
