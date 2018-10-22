@@ -20,8 +20,8 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 
 		'group' => [
 			'container' => null,
-			'label' => 'p class="h3 modal-header"',
-			'description' => 'p class="pl-3 lead"',
+			'label' => 'p class="h5 pb-1 border-bottom"',
+			'description' => 'p class="text-muted"',
 		],
 
 		'controls' => [
