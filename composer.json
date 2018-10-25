@@ -1,8 +1,8 @@
 {
-	"name": "JCode/FormRenders",
+	"name": "stanislav-janu/FormRenders",
 	"description": "Form renders for Nette Forms",
 	"homepage": "https://lweb.cz",
-	"license": ["EULA"],
+	"license": ["MIT"],
 	"authors": [
 		{
 			"name": "Stanislav Janů",
