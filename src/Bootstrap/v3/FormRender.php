@@ -5,10 +5,16 @@ namespace JCode\FormRenders\Bootstrap\v3;
 use Nette,
 	Nette\Forms\Controls;
 
+/**
+ * Class FormRender
+ * @package JCode\FormRenders\Bootstrap\v3
+ */
 class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {
+	/** @var bool */
 	public $isAjax = false;
 
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,
@@ -66,11 +72,19 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		],
 	];
 
+	/**
+	 * FormRender constructor.
+	 *
+	 * @param bool $isAjax
+	 */
 	public function __construct(bool $isAjax = false)
 	{
 		$this->isAjax = $isAjax;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function renderBegin()
 	{
 		if(empty($this->form->getElementPrototype()->getAttribute('class')))
@@ -100,6 +114,9 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		return parent::renderControls($parent);
 	}
 
+	/**
+	 * @param $parent
+	 */
 	public function convertControl($parent)
 	{
 		if ($parent instanceof Controls\Button && empty($parent->control->getAttribute('class')))

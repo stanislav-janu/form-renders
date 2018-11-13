@@ -2,8 +2,13 @@
 
 namespace JCode\FormRenders\Bootstrap\v3;
 
+/**
+ * Class TabbedFormRender
+ * @package JCode\FormRenders\Bootstrap\v3
+ */
 class TabbedFormRender extends FormRender
 {
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,
@@ -61,6 +66,9 @@ class TabbedFormRender extends FormRender
 		],
 	];
 
+	/**
+	 * @return string
+	 */
 	public function renderBegin()
 	{
 		$this->form->getElementPrototype()->setAttribute('class', 'tab-content'. ($this->isAjax ? ' ajax' : ''));

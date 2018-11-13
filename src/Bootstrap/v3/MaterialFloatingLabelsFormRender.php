@@ -2,8 +2,13 @@
 
 namespace JCode\FormRenders\Bootstrap\v3;
 
+/**
+ * Class MaterialFloatingLabelsFormRender
+ * @package JCode\FormRenders\Bootstrap\v3
+ */
 class MaterialFloatingLabelsFormRender extends FormRender
 {
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,

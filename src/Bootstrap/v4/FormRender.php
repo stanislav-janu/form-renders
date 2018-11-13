@@ -4,10 +4,19 @@ namespace JCode\FormRenders\Bootstrap\v4;
 
 use Nette;
 
+/**
+ * Class FormRender
+ *
+ * @original https://github.com/aleswita/FormRenderer
+ *
+ * @package JCode\FormRenders\Bootstrap\v4
+ */
 class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {
+	/** @var bool */
 	public $isAjax = false;
 
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,
@@ -67,13 +76,22 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		],
 	];
 
+	/** @var string */
 	public $labelClass = 'col-form-label';
 
+	/**
+	 * FormRender constructor.
+	 *
+	 * @param bool $isAjax
+	 */
 	public function __construct(bool $isAjax = false)
 	{
 		$this->isAjax = $isAjax;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function renderBegin()
 	{
 		if(empty($this->form->getElementPrototype()->getAttribute('class')))

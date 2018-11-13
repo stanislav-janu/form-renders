@@ -2,8 +2,13 @@
 
 namespace JCode\FormRenders\Bootstrap\v3;
 
-class FullWightFormRender extends FormRender
+/**
+ * Class FullWidthFormRender
+ * @package JCode\FormRenders\Bootstrap\v3
+ */
+class FullWidthFormRender extends FormRender
 {
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,

@@ -4,8 +4,13 @@ namespace JCode\FormRenders\Bootstrap\v4;
 
 use Nette;
 
+/**
+ * Class MaterialFormRender
+ * @package JCode\FormRenders\Bootstrap\v4
+ */
 class MaterialFormRender extends FormRender
 {
+	/** @var array */
 	public $wrappers = [
 		'form' => [
 			'container' => null,
@@ -65,8 +70,14 @@ class MaterialFormRender extends FormRender
 		],
 	];
 
+	/** @var string */
 	public $labelClass = 'col-form-label col-md-3 text-md-right col-sm-12';
 
+	/**
+	 * @param \Nette\Forms\IControl $control
+	 *
+	 * @return \Nette\Utils\Html
+	 */
 	public function renderControl(Nette\Forms\IControl $control): Nette\Utils\Html
 	{
 		$body = $this->getWrapper('control container');
