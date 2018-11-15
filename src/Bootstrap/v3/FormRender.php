@@ -2,8 +2,7 @@
 
 namespace JCode\FormRenders\Bootstrap\v3;
 
-use Nette,
-	Nette\Forms\Controls;
+use Nette;
 
 /**
  * Class FormRender
@@ -92,54 +91,124 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 		return parent::renderBegin();
 	}
 
+
 	/**
-	 * Renders group of controls.
-	 * @param  Nette\Forms\Container|Nette\Forms\ControlGroup
+	 * @param array $controls
 	 * @return string
 	 */
-	public function renderControls($parent)
+	public function renderPairMulti(array $controls): string
 	{
-		if (!($parent instanceof Nette\Forms\Container || $parent instanceof Nette\Forms\ControlGroup))
-			throw new Nette\InvalidArgumentException('Argument must be Nette\Forms\Container or Nette\Forms\ControlGroup instance.');
+		foreach ($controls as $control)
+		{
+			if ($control instanceof Nette\Forms\Controls\Button)
+			{
+				if ($control->controlPrototype->getAttribute('class') === null || (is_array($control->controlPrototype->getAttribute('class')) && !Nette\Utils\Strings::contains(implode(' ', array_keys($control->controlPrototype->getAttribute('class'))), 'btn btn-')))
+					$control->controlPrototype->setAttribute('class', (empty($primary) ? 'btn btn-primary' : 'btn btn-secondary'));
 
-		foreach($parent->getControls() as $control)
-			$this->convertControl($control);
+				$primary = true;
+			}
+		}
 
-		return parent::renderControls($parent);
+		return parent::renderPairMulti($controls);
 	}
 
 	/**
-	 * @param $parent
+	 * @param Nette\Forms\IControl $control
+	 * @return Nette\Utils\Html
 	 */
-	public function convertControl($parent)
+	public function renderControl(Nette\Forms\IControl $control): Nette\Utils\Html
 	{
-		if ($parent instanceof Controls\Button && empty($parent->control->getAttribute('class')))
+		if ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList)
 		{
-			$parent->setHtmlAttribute('class', 'btn btn-default');
+			$control->controlPrototype->setAttribute('class', 'checkbox');
+
+			if ($control instanceof Nette\Forms\Controls\CheckboxList)
+				$control->separatorPrototype->setName('div')->setAttribute('class', 'checkbox');
 		}
-		elseif ($parent instanceof Controls\TextBase || $parent instanceof Controls\TextArea || $parent instanceof Controls\TextInput || $parent instanceof Controls\SelectBox || $parent instanceof Controls\MultiSelectBox)
+		elseif ($control instanceof Nette\Forms\Controls\RadioList)
 		{
-			$parent->setHtmlAttribute('class', 'form-control');
-			if($parent instanceof Controls\TextBase)
+			$control->containerPrototype->setName('div')->setAttribute('class', 'radio');
+		}
+		else
+		{
+			$type = $control->getControlPrototype()->getAttribute('type');
+			if($type == 'datetime')
+				$control->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "YYYY-MM-DD HH:mm"}');
+			elseif($type == 'date')
+				$control->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "YYYY-MM-DD"}');
+			elseif($type == 'time')
+				$control->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "HH:mm"}');
+
+			if ($control->hasErrors())
+				$control->controlPrototype->setAttribute('class', 'is-invalid');
+
+			$control->controlPrototype->setAttribute('class', 'form-control');
+		}
+
+		$parent = parent::renderControl($control);
+
+		// addons
+		if ($control instanceof Nette\Forms\Controls\TextInput)
+		{
+			$leftAddon = $control->getOption('left-addon');
+			$rightAddon = $control->getOption('right-addon');
+
+			if ($leftAddon !== null || $rightAddon !== null)
 			{
-				$type = $parent->getControlPrototype()->getAttribute('type');
-				if($type == 'datetime')
+				$children = $parent->getChildren();
+				$parent->removeChildren();
+
+				$container = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group');
+
+				if ($leftAddon !== null)
 				{
-					$parent->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "YYYY-MM-DD HH:mm"}');
+					if (!is_array($leftAddon))
+						$leftAddon = [$leftAddon];
+
+					$div = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group-prepend');
+
+					foreach ($leftAddon as $v)
+						$div->insert(null, Nette\Utils\Html::el('span')->setAttribute('class', 'input-group-text')->setText($v));
+
+					$container->insert(null, $div);
 				}
-				elseif($type == 'date')
+
+				foreach ($children as $child)
 				{
-					$parent->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "YYYY-MM-DD"}');
+					$foo = Nette\Utils\Strings::after($child, $control->getControlPart()->render());
+
+					if ($foo !== false)
+					{
+						$container->insert(null, $control->getControlPart()->render());
+						$description = $foo;
+
+					}
+					else
+					{
+						$container->insert(null, $child);
+					}
 				}
-				elseif($type == 'time')
+
+				if ($rightAddon !== null)
 				{
-					$parent->setHtmlAttribute('data-onload-datetimepicker', '{"locale": "cs", "format": "HH:mm"}');
+					if (!is_array($rightAddon))
+						$rightAddon = [$rightAddon];
+
+					$div = Nette\Utils\Html::el('div')->setAttribute('class', 'input-group-append');
+
+					foreach ($rightAddon as $v)
+						$div->insert(null, Nette\Utils\Html::el('span')->setAttribute('class', 'input-group-text')->setText($v));
+
+					$container->insert(null, $div);
 				}
+
+				$parent->insert(null, $container);
+
+				if (!empty($description))
+					$parent->insert(null, $description);
 			}
 		}
-		elseif ($parent instanceof Controls\Checkbox || $parent instanceof Controls\CheckboxList || $parent instanceof Controls\RadioList)
-		{
-			$parent->getSeparatorPrototype()->setName('div')->setAttribute('class', $parent->getControlPrototype()->type);
-		}
+
+		return $parent;
 	}
 }
