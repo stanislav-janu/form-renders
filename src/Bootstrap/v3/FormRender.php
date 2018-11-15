@@ -99,17 +99,11 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 	 */
 	public function renderControls($parent)
 	{
-		if ($parent instanceof Nette\Forms\ControlGroup)
-		{
-			foreach($parent->getControls() as $control)
-			{
-				$this->convertControl($control);
-			}
-		}
-		else
-		{
-			$this->convertControl($parent);
-		}
+		if (!($parent instanceof Nette\Forms\Container || $parent instanceof Nette\Forms\ControlGroup))
+			throw new Nette\InvalidArgumentException('Argument must be Nette\Forms\Container or Nette\Forms\ControlGroup instance.');
+
+		foreach($parent->getControls() as $control)
+			$this->convertControl($control);
 
 		return parent::renderControls($parent);
 	}
