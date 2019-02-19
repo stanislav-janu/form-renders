@@ -69,9 +69,10 @@ class TabbedFormRender extends FormRender
 	/**
 	 * @return string
 	 */
-	public function renderBegin()
+	public function renderBegin() : string
 	{
-		$this->form->getElementPrototype()->setAttribute('class', 'tab-content'. ($this->isAjax ? ' ajax' : ''));
+		$this->form->getElementPrototype()->setAttribute('class', 'tab-content'.($this->isAjax ? ' ajax' : ''));
+
 		return parent::renderBegin();
 	}
 }

@@ -4,6 +4,7 @@ namespace JCode\FormRenders\Bootstrap\v4;
 
 use Nette;
 
+
 /**
  * Class MaterialFormRender
  * @package JCode\FormRenders\Bootstrap\v4
@@ -78,7 +79,7 @@ class MaterialFormRender extends FormRender
 	 *
 	 * @return \Nette\Utils\Html
 	 */
-	public function renderControl(Nette\Forms\IControl $control): Nette\Utils\Html
+	public function renderControl(Nette\Forms\IControl $control) : Nette\Utils\Html
 	{
 		$body = $this->getWrapper('control container');
 		if ($this->counter % 2) {
@@ -87,44 +88,43 @@ class MaterialFormRender extends FormRender
 
 		$description = $control->getOption('description');
 		if ($description instanceof Nette\Utils\IHtmlString) {
-			$description = ' ' . $description;
-
+			$description = ' '.$description;
 		} elseif ($description != null) { // intentionally ==
 			if ($control instanceof Nette\Forms\Controls\BaseControl) {
 				$description = $control->translate($description);
 			}
-			$description = ' ' . $this->getWrapper('control description')->setText($description);
-
+			$description = ' '.$this->getWrapper('control description')->setText($description);
 		} else {
 			$description = '';
 		}
 
 		if ($control->isRequired()) {
-			$description = $this->getValue('control requiredsuffix') . $description;
+			$description = $this->getValue('control requiredsuffix').$description;
 		}
 
 		$control->setOption('rendered', true);
 
 		// Is this an instance of a RadioList or Checkbox?
-		if ($control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList)
-		{
+		if ($control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList) {
 			$el = Nette\Utils\Html::el();
-			foreach($control->getItems() as $key => $item)
-				$el->addHtml($control->getLabelPart($key)->addHtml($control->getControlPart($key)->setAttribute('class', 'form-check-input'))->addHtml('<span class="form-check-sign"><span class="check"></span></span>'));
-		}
-		else if ($control instanceof Nette\Forms\Controls\Checkbox)
-		{
+			foreach ($control->getItems() as $key => $item) {
+				$el->addHtml($control->getLabelPart($key)
+					->addHtml($control->getControlPart($key)->setAttribute('class', 'form-check-input'))
+					->addHtml('<span class="form-check-sign"><span class="check"></span></span>'));
+			}
+		} elseif ($control instanceof Nette\Forms\Controls\Checkbox) {
 			$el = Nette\Utils\Html::el('div', ['class' => 'form-check']);
-			$el->addHtml($control->getLabelPart()->addHtml($control->getControlPart()->setAttribute('class', 'form-check-input'))->addHtml('<span class="form-check-sign"><span class="check"></span></span>'));
-		}
-		else
-		{
+			$el->addHtml($control->getLabelPart()
+				->addHtml($control->getControlPart()->setAttribute('class', 'form-check-input'))
+				->addHtml('<span class="form-check-sign"><span class="check"></span></span>'));
+		} else {
 			$el = $control->getControl();
 		}
 
 		if ($el instanceof Nette\Utils\Html && $el->getName() === 'input') {
 			$el->class($this->getValue("control .$el->type"), true);
 		}
-		return $body->setHtml($el . $description . $this->renderErrors($control));
+
+		return $body->setHtml($el.$description.$this->renderErrors($control));
 	}
 }
