@@ -11,6 +11,7 @@ use Nette;
  * @original https://github.com/aleswita/FormRenderer
  *
  * @package JCode\FormRenders\Bootstrap\v4
+ * @deprecated Use czubehead/bootstrap-4-forms. Is much better.
  */
 class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 {

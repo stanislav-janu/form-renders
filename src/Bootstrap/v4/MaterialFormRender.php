@@ -8,6 +8,7 @@ use Nette;
 /**
  * Class MaterialFormRender
  * @package JCode\FormRenders\Bootstrap\v4
+ * @deprecated Use czubehead/bootstrap-4-forms. Is much better.
  */
 class MaterialFormRender extends FormRender
 {

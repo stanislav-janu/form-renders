@@ -2,7 +2,7 @@
 	"name": "stanislav-janu/form-renders",
 	"description": "Form renders for Nette Forms",
 	"homepage": "https://lweb.cz",
-	"license": ["MIT"],
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Stanislav Janů",
@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"nette/forms": "^2.4 || ^3.0"
+		"nette/forms": "^2.4"
 	},
 	"conflict": {
 		"nette/forms": "<2.4"
@@ -19,7 +19,7 @@
 	"autoload": {
 		"classmap": ["src/"]
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"extra": {
 		"branch-alias": {
 			"dev-master": "1.0-dev"
