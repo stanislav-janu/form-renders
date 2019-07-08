@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"nette/forms": "^2.4"
+		"nette/forms": "^2.4 || ^3.0"
 	},
 	"conflict": {
 		"nette/forms": "<2.4"
