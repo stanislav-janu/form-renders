@@ -144,7 +144,9 @@ class FormRender extends Nette\Forms\Rendering\DefaultFormRenderer
 				$control->controlPrototype->setAttribute('class', 'is-invalid');
 			}
 
-			$control->controlPrototype->setAttribute('class', 'form-control');
+			if ($control->controlPrototype->getAttribute('class') === null) {
+				$control->controlPrototype->setAttribute('class', 'form-control');
+			}
 		}
 
 		$parent = parent::renderControl($control);
